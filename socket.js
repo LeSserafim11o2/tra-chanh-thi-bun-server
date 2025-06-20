@@ -6,12 +6,18 @@ let io;
 const connectedUsers = new Map();
 const userRoles = new Map();
 
-export const initSocketServer = (server) => {
+export const initSocketServer = (server, allowedOrigins) => {
     io = new Server(server, {
         cors: {
-            origin: allowedOrigins,
-            methods: ["GET", "POST"],
-            credentials: true
+        origin: function (origin, callback) {
+            if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+            } else {
+            callback(new Error("Not allowed by CORS (socket.io)"));
+            }
+        },
+        methods: ["GET", "POST"],
+        credentials: true
         }
     });
 

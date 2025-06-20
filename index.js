@@ -55,4 +55,4 @@ connectDatabase();
 
 const index = app.listen(PORT, () => console.log(`Cổng đang được mở tại ${PORT}`));
 
-initSocketServer(index);
+initSocketServer(index, allowedOrigins);
