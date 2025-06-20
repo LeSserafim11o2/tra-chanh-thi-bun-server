@@ -9,7 +9,7 @@ const userRoles = new Map();
 export const initSocketServer = (server) => {
     io = new Server(server, {
         cors: {
-            origin: process.env.CLIENT_URL,
+            origin: allowedOrigins,
             methods: ["GET", "POST"],
             credentials: true
         }
